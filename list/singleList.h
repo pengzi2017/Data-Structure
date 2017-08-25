@@ -26,10 +26,10 @@ public:
 	void makeEmpty();//将表清空；
 	ListNode<T> *getHead() { return first; };
 	ListNode<T> *search(const T x)const;//查找x，返回x的位置；
-	ListNode<T> *locate(int i)const;//搜索第i个元素的地址；
+	ListNode<T> *locate(int i)const;//搜索第i个元素的地址,如果i等于零，则返回头结点的地址；
 	bool getData(int i, T&x)const;//取第i个数，传值给x
 	bool setData(int i, const T x);//将第i个数的值设置成x
-	bool insert(int i, const T x);//在i位置  后一位  插入x
+	bool insert(int i, const T x);//在i位置  后一位  插入x,如果i等于0，则插入在最开头位置！！！
 	bool remove(int i, T&x);//删除第i位的值，传值给x
 	bool isEmpty()const { return first->link == NULL ? true : false; };//判断是否空
 	bool isFull()const { return false; };//判断是否满,
@@ -98,6 +98,7 @@ ListNode<T>* SingleList<T>::locate(int i) const
 {
 	ListNode<T> *ptr = first;
 	int tab = 1;
+	if (i == 0||ptr->link==NULL)return ptr;
 	while (ptr->link != NULL && tab <= i)
 	{
 		ptr = ptr->link;
