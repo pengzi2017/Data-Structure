@@ -1,3 +1,4 @@
+//Ë«ÏòÑ­»·Á´±í
 #ifndef DOUBLELIST_H
 #define DOUBLELIST_H
 #include<iostream>
@@ -35,7 +36,6 @@ public:
 private:
 	DoubleNode<T> *first;
 };
-
 
 #endif
 

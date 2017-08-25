@@ -1,3 +1,4 @@
+//µ¥Á´±í£»
 #ifndef SINGLELIST_H
 #define SINGLELIST_H
 #include<iostream>
@@ -37,9 +38,10 @@ public:
 	void input(T endtag);
 	void output()const;
 	SingleList<T>operator=(SingleList<T>&L);
-private:
+protected:
 	ListNode<T> *first;
 };
+#endif // !SINGLELIST_H
 
 template<class T>
 SingleList<T>::SingleList(SingleList<T> &L)
@@ -216,5 +218,5 @@ SingleList<T> SingleList<T>::operator=(SingleList<T>& L)
 	return *this;
 }
 
-#endif // !SINGLELIST_H
+
 
