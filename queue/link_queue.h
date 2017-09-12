@@ -26,7 +26,8 @@ public:
 	bool isEmpty()const { return front==NULL? true : false; };
 	bool isFull()const { return true; };
 	int getSize()const;
-	friend osrteam operator<<(ostream &os, LinkQueue<T> &dt);
+	void outPut()const;
+	//friend osrteam operator<<(ostream &os, LinkQueue<T> &dt);
 private:
 	LinkNode<T> *front, *rear;
 	void makeEmpty();
@@ -55,7 +56,7 @@ bool LinkQueue<T>::deQueue(T & d)
 {
 	if (isEmpty())return false;
 	LinkNode<T> *tab = front->next;
-	t = front->data;
+	d = front->data;
 	delete front;
 	front = tab;
 	return true;
@@ -83,6 +84,18 @@ int LinkQueue<T>::getSize() const
 }
 
 template<class T>
+void LinkQueue<T>::outPut() const
+{
+	LinkNode<T> *tab =front;
+	while (tab != NULL)
+	{
+		cout<< tab->data << ",";
+		tab = tab->next;
+	}
+	cout<< endl;
+}
+
+template<class T>
 void LinkQueue<T>::makeEmpty()
 {
 	LinkNode<T> *tab;
@@ -93,7 +106,7 @@ void LinkQueue<T>::makeEmpty()
 		front = tab;
 	}
 }
-
+/*
 template<class T>
 osrteam operator<<(ostream &os, LinkQueue<T> &dt)
 {
@@ -106,3 +119,4 @@ osrteam operator<<(ostream &os, LinkQueue<T> &dt)
 	os << endl;
 	return os;
 }
+*/

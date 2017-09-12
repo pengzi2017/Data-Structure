@@ -3,6 +3,7 @@
 #define SEQ_QUEUE_H
 #include"queue.h"
 #include<iostream>
+#include<ostream>
 using namespace std;
 template<class T>
 
@@ -15,22 +16,31 @@ public:
 	bool deQueue(T &data);
 	bool getFront(T &data);
 	bool isEmpty()const {return front == rear ? true : false; };
-	bool isFull()const {return (rear+1)%maxSize==front? true : false; };
-	int getSize()const {return (rear-front+maxSize)%maxSize; };
-	friend osrteam operator<<(ostream &os, SeqQueue<T> &dt);
+	bool isFull()const {return (rear+1)%maxSizes==front? true : false; };
+	int getSize()const {return (rear-front+maxSizes)%maxSizes; };
+	/*
+	friend osrteam &operator<<(ostream &os, SeqQueue &dt)//////////////????????????????????????????
+	{
+		for (int i = dt.front; i != dt.rear; i = (i + 1) % dt.makeSize)
+			os << dt.element[i] << ",";
+		os << endl;
+		return os;
+	};
+	*/
+	void outPut();
 private:
 	int front, rear;
 	T *element;
-	int maxSize;
+	int maxSizes;
 	void makeSize();
 };
 
 #endif
 
 template<class T>
-SeqQueue<T>::SeqQueue(int sz):maxSize(sz),front(0),rear(0)
+SeqQueue<T>::SeqQueue(int sz):maxSizes(sz),front(0),rear(0)
 {
-	element = new T[maxSize];
+	element = new T[maxSizes];
 }
 
 template<class T>
@@ -43,8 +53,8 @@ template<class T>
 bool SeqQueue<T>::enQueue(T & data)
 {
 	if (isFull())makeSize();
-	rear=(rear+1)%maxSize;
 	element[rear] = data;
+	rear = (rear + 1) % maxSizes;
 	return true;
 }
 
@@ -53,7 +63,7 @@ bool SeqQueue<T>::deQueue(T & data)
 {
 	if (isEmpty())return false;
 	data = element[front];
-	front = (front+1)%maxSize;
+	front = (front+1)%maxSizes;
 	return true;
 }
 
@@ -66,16 +76,24 @@ bool SeqQueue<T>::getFront(T & data)
 }
 
 template<class T>
+void SeqQueue<T>::outPut()
+{
+	for (int i =front; i !=rear; i = (i + 1)%maxSizes)
+		cout<<element[i] << ",";
+	cout<< endl;
+}
+
+template<class T>
 void SeqQueue<T>::makeSize()
 {
-	T *otherElem = new T[maxSize + defaultSize];
-	for (int i =front; i!=rear; i=(i+1)%maxSize)
+	T *otherElem = new T[maxSizes + defaultSize];
+	for (int i =front; i!=rear; i=(i+1)%maxSizes)
 		otherElem[i] = element[i];
-	maxSize = maxSize + defaultSize;
+	maxSizes = maxSizes + defaultSize;
 	delete[] element;
 	element = otherElem;
 }
-
+/*
 template<class T>
 osrteam operator<<(ostream &os, SeqQueue<T> &dt)
 {
@@ -84,3 +102,4 @@ osrteam operator<<(ostream &os, SeqQueue<T> &dt)
 	os << endl;
 	return os;
 }
+*/
